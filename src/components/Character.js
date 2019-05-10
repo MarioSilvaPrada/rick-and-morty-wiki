@@ -20,7 +20,6 @@ const Card = styled('div')`
         cursor:pointer;
         transform: scale(1.1);
     }
-
 `;
 
 const Character = ({ searchFilter, pageSelected }) => {

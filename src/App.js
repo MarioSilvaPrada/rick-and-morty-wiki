@@ -50,7 +50,7 @@ class App extends Component {
     
     return (
       <Container>
-      <h1>Rick and Morty API</h1>
+      <h1>Rick and Morty Wikipedia</h1>
         <SearchFilter onChange={this.searchChange} />
         <Pagination 
               pageChange={this.pageChange}
