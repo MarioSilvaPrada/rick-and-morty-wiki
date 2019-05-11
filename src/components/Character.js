@@ -20,7 +20,8 @@ const Card = styled('div')`
         cursor:pointer;
         transform: scale(1.1);
     }
-`;
+
+`
 
 const Character = ({ searchFilter, match }) => {
     const page = parseInt(match.params.page)
