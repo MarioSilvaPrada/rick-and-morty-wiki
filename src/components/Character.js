@@ -26,7 +26,8 @@ const Card = styled('div')`
 const Character = ({ searchFilter, match }) => {
     const page = parseInt(match.params.page)
     
-    return (<Query query={CHARACTER} variables={{ page }}>
+    return (
+    <Query query={CHARACTER} variables={{ page }}>
         {({ loading, error, data }) => {
             if (loading) return <p> Loading... </p>;
             if (error) return <p> Error </p>;
