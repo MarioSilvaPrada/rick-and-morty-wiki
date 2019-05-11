@@ -2,7 +2,8 @@ import React from "react";
 import {
     BrowserRouter as Router,
     Route,
-    Switch
+    Switch,
+    Redirect
 } from "react-router-dom";
 
 import { ApolloProvider } from "react-apollo";
@@ -15,6 +16,7 @@ const Root = () => (
     <ApolloProvider client={client}>
         <Router>
             <Switch>
+                <Redirect exact from="/" to="/1" />
                 <Route exact path="/char/:id" component={CharacterInfo} />
                 <Route path="/:page" component={App} />
             </Switch>
