@@ -1,11 +1,25 @@
+@font-face {
+  font-family: 'RickAndMorty';
+  src: url('./font/RickAndMorty.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RickAndMortyNormal';
+    src: url('./font//RickAndMortyNormal.ttf') format('truetype');
+}
+
+.title{
+    font-family: 'RickAndMorty';
+    font-size: 4rem;
+    color: #02B1C8;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
 body {
+  font-family: 'RickAndMortyNormal';
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.5rem;
 }
 
 code {

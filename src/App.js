@@ -10,63 +10,42 @@ import Character from './components/Character'
 
 class App extends Component {
 
-  constructor() {
-    super()
-    this.state = {
-      // characters: [],
-      loading: true,
-      searchFilter: '',
-      page: 1
+    constructor() {
+        super()
+        this.state = {
+            // characters: [],
+            loading: true,
+            searchFilter: ''
+        }
     }
-  }
 
-  // componentDidMount() {
-  //   fetch('https://rickandmortyapi.com/api/charac  ')
-  //     .then(response => response.json())
-  //     .then(users => this.setState({ characters: users.results, loading: false }, () => console.log(this.state.characters)));
-  // }
+    // componentDidMount() {
+    //   fetch('https://rickandmortyapi.com/api/charac  ')
+    //     .then(response => response.json())
+    //     .then(users => this.setState({ characters: users.results, loading: false }, () => console.log(this.state.characters)));
+    // }
 
 
-  searchChange = (e) => {
-    this.setState({ searchFilter: e.target.value }, () => console.log(this.state.searchFilter))
-  }
+    searchChange = (e) => {
+        this.setState({ searchFilter: e.target.value })
+    }
 
-  pageChange = (num) => {
-    this.setState({page: num}, ()=> console.log(this.state.page))
-  }
 
-  nextPage = () => {
-    let currentPage = this.state.page;
-    this.setState({ page:currentPage + 1 })
+    render() {
 
-  }
-
-  previousPage = () => {
-    let currentPage = this.state.page;
-    this.setState({ page:currentPage - 1 })
-  }
-
-  render() {
+        return (
+        <Container>
+            <h1 className="title" > Rick and Morty Wikipedia </h1>
+            <SearchFilter onChange={this.searchChange} />
+            <Pagination 
+                match={this.props.match}
+            /> 
+            <CharacterList >
+                <Character searchFilter={this.state.searchFilter} pageSelected={this.state.page} match={this.props.match}/> 
+            </CharacterList> 
+        </Container>
+            )
+        }
+    }
     
-    return (
-      <Container>
-      <h1>Rick and Morty Wikipedia</h1>
-        <SearchFilter onChange={this.searchChange} />
-        <Pagination 
-              pageChange={this.pageChange}
-              nextPage={this.nextPage}
-              previousPage={this.previousPage}
-              pageSelected={this.state.page}
-              />
-        <CharacterList>
-          <Character 
-              searchFilter={this.state.searchFilter} 
-              pageSelected={this.state.page}
-               />
-        </CharacterList>
-      </Container>
-    )
-  }
-}
-
 export default App;

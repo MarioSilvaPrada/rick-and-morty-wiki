@@ -15,8 +15,8 @@ const Root = () => (
     <ApolloProvider client={client}>
         <Router>
             <Switch>
-                <Route exact path="/:id" component={CharacterInfo} />
-                <Route path="/" component={App} />
+                <Route exact path="/char/:id" component={CharacterInfo} />
+                <Route path="/:page" component={App} />
             </Switch>
         </Router>
     </ApolloProvider>

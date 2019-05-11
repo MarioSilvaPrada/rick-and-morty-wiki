@@ -22,48 +22,46 @@ const Card = styled('div')`
     }
 `;
 
-const Character = ({ searchFilter, pageSelected }) => {
+const Character = ({ searchFilter, match }) => {
+    const page = parseInt(match.params.page)
+    
+    return (<Query query={CHARACTER} variables={{ page }}>
+        {({ loading, error, data }) => {
+            if (loading) return <p> Loading... </p>;
+            if (error) return <p> Error </p>;
 
-  let page = pageSelected;
+            let chars = data.characters.results;
 
-  return (
-    <Query
-      query={CHARACTER} variables={{ page }}>
-      {({ loading, error, data }) => {
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error</p>;
+            const filterCharacters = chars.filter(char => {
+                return char.name.toLowerCase().includes(searchFilter.toLowerCase())
+            })
 
-        let chars = data.characters.results;
-
-        const filterCharacters = chars.filter(char => {
-          return char.name.toLowerCase().includes(searchFilter.toLowerCase())
-        })
-
-        return filterCharacters.map((char, i) => (
-          <Link to={`/${char.id}`} style={{ textDecoration: 'none' }}>
-            <Card>
-              <img alt='' src={char.image} />
-              <div>
-                <h2>{char.name}</h2>
-              </div>
-            </Card>
-          </Link>
-        ));
-      }}
+            return filterCharacters.map((char, i) => (
+                <Link to={`/char/${char.id}`} style={{ textDecoration: 'none' }} >
+                    <Card >
+                        <img alt='' src={char.image} />
+                        <div>
+                            <h2> {char.name} </h2>
+                        </div>
+                    </Card>
+                </Link>
+            ));
+        }
+        }
     </Query>
-  )
+    )
 }
 
 const CHARACTER = gql`
-query($page:Int) { 
-  characters(page:$page){
-    results{
-      name,
-      image,
-      id
+query($page:Int) {
+            characters(page: $page){
+            results{
+        name,
+        image,
+        id
+      }
     }
   }
-}
-`
+  `
 
 export default Character;
