@@ -18,31 +18,34 @@ const CardInfo = styled('div')`
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     margin-bottom: 40px;
     padding:20px;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
     background-color: #FFE53B;
     background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
-`;
+    
+`
 
 
 const CharacterInfo = ({ match }) => {
     const id = match.params.id;
-    console.log(id)
 
     return (
         <Query query={QUERY_CHARACTER_INFO} variables={{ id }}>
             {({ loading, error, data }) => {
                 if (loading) return <p>Loading...</p>;
-                if (error) return <p>Error</p>;
-
-                console.log(data.character)
+                {/* if (error) return <p>Error</p>; */}
 
                 return (
                     <CardInfo>
                         <img alt='' src={data.character.image} />
-                        <p>{data.character.name}</p>
-                        <p>{data.character.gender}</p>
-                        <p>{data.character.status}</p>
+                        <p>Name: {data.character.name}</p>
+                        <p>Gender: {data.character.gender}</p>
+                        <p>Specie: {data.character.species}</p>
+                        <p>Status: {data.character.status}</p>
+                        <p>Origin: {data.character.origin.name}</p>
+                        <p>Location: {data.character.location.name}</p>
+                        
+
                     </CardInfo>
                 );
             }}
@@ -53,13 +56,20 @@ const CharacterInfo = ({ match }) => {
 
 const QUERY_CHARACTER_INFO = gql`
     query($id:ID) { 
-    character(id:$id){
-      id,
-      name,
-      status,
-      gender,
-      image
-    }
+        character(id:$id){
+            id,
+            name,
+            status,
+            gender,
+            image,
+            species,
+            origin{
+              name
+            },
+            location{
+                name
+            }
+        }
     }
 `
 
